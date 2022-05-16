@@ -26,22 +26,20 @@ const StoreData = [
 ];
 
 type StoreProps = {
-  count: number;
-  storePurchase?: (cost: number) => void;
+  storePurchase?: (item: StoreItem) => void;
 }
 
 const Store: React.FC<StoreProps> = ({
-  storePurchase = (cost: number) => {},
-  count = 0,
+  storePurchase = (item: StoreItem) => {},
 }) => {
-  const purchaseStand = () => {
-    storePurchase(StoreData[1].cost);
+  const purchaseCapital = (item: StoreItem) => {
+    storePurchase(item);
   };
 
   return (
     <div className="Store">
       <h3>Store</h3>
-      <button type="button" onClick={purchaseStand}>Buy Taco Stand - 100</button>
+      <button type="button" onClick={() => purchaseCapital(StoreData[0])}>Buy Taco Stand - 100</button>
     </div>
   );
 };
