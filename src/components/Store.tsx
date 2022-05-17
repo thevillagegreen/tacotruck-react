@@ -39,7 +39,19 @@ const Store: React.FC<StoreProps> = ({
   return (
     <div className="Store">
       <h3>Store</h3>
-      <button type="button" onClick={() => purchaseCapital(StoreData[0])}>Buy Taco Stand - 100</button>
+      <div className="Store-buttons">
+        <button type="button" onClick={() => purchaseCapital(StoreData[0])}>Buy Taco Stand - 100</button>
+      </div>
+      <div className='Store-inventory'>
+        <h3>
+          Taco stands:
+          { 10 }
+        </h3>
+        <h3>
+          Restaurants:
+          { 10 }
+        </h3>
+      </div>
     </div>
   );
 };

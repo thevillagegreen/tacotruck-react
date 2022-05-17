@@ -10,6 +10,11 @@ type StoreItem = {
   factor: number,
 }
 
+type GameInfo = {
+  currentCount: number;
+  perInterval: number;
+}
+
 const Game: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [perInt, setPerInt] = useState<number>(0);
@@ -36,7 +41,7 @@ const Game: React.FC = () => {
     if (item.name === 'stand') {
       setCount(count - item.cost);
       setStands(stands + 1);
-      setPerInt(perInt + 0.01);
+      setPerInt(perInt + 1);
     } else if (item.name === 'restaurant') {
       setRests(rests + 1);
       setPerInt(perInt + 1);
@@ -49,6 +54,10 @@ const Game: React.FC = () => {
         <h3>
           Count:
           { Math.floor(count) }
+        </h3>
+        <h3>
+          Per Interval:
+          { perInt }
         </h3>
         <h3>
           Taco stands:
