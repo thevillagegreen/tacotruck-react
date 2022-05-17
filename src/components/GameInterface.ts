@@ -1,4 +1,4 @@
-type CapitalObject = {
+interface CapitalObject {
   name: string,
   display: string,
   cost: number,
@@ -6,7 +6,7 @@ type CapitalObject = {
   factor: number,
 }
 
-type UpgradeObject = {
+interface UpgradeObject {
   name: 'placeholder';
 }
 
