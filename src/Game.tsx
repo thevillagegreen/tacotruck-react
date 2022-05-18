@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ClickArea from './components/ClickArea';
-import Store from './components/Store';
+import CapitalStore from './components/CapitalStore';
 import { GameInterface } from './GameInterface';
 import DefaultGameState from './DefaultGameState';
 
@@ -18,14 +18,12 @@ type StoreItem = {
 // }
 
 const Game: React.FC = () => {
-  let GameInfo: GameInterface;
   const [count, setCount] = useState<number>(0);
   const [perInt, setPerInt] = useState<number>(0);
   const [stands, setStands] = useState<number>(0);
   const [rests, setRests] = useState<number>(0);
 
   const [GameState, setGameState] = useState<GameInterface>(DefaultGameState);
-  console.log(GameState);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,11 +35,17 @@ const Game: React.FC = () => {
     return () => clearInterval(interval);
   }, [count]);
 
-  const handleChange = () => {
-    setCount(count + 1);
+  const handleTacoClickIncrement = () => {
+    const tacosIncrement = GameState.tacos + 1;
+    setGameState(
+      {
+        ...GameState,
+        tacos: tacosIncrement,
+      },
+    );
   };
 
-  const storePurchase = (item: StoreItem) => {
+  const handleCapitalPurchase = (item: StoreItem) => {
     console.log(item);
     setCount(count - item.cost);
     if (item.name === 'stand') {
@@ -54,29 +58,34 @@ const Game: React.FC = () => {
     }
   };
 
+  const upgradePurchase = (item: StoreItem) => {
+    console.log("placeholder");
+  };
+
   return (
     <div className="Game">
       <div className="Game-status">
         <h3>
           Count:
-          { Math.floor(count) }
+          { Math.floor(GameState.tacos) }
         </h3>
         <h3>
           Per Interval:
-          { perInt }
+          { GameState.perInterval }
         </h3>
         <h3>
           Taco stands:
-          { stands }
+          { GameState.capital[0].owned }
         </h3>
         <h3>
           Restaurants:
-          { rests }
+          { GameState.capital[1].owned }
         </h3>
       </div>
-      <ClickArea onClick={handleChange} />
-      <Store
-        storePurchase={storePurchase}
+      <ClickArea onClick={() => handleTacoClickIncrement()} />
+      <CapitalStore
+        handleCapitalPurchase={handleCapitalPurchase}
+        capitalArr={GameState.capital}
       />
     </div>
   );

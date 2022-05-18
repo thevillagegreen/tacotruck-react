@@ -1,4 +1,4 @@
-interface CapitalObject {
+export interface CapitalObject {
   name: string,
   display: string,
   cost: number,
@@ -6,7 +6,7 @@ interface CapitalObject {
   factor: number,
 }
 
-interface UpgradeObject {
+export interface UpgradeObject {
   name: 'placeholder';
 }
 

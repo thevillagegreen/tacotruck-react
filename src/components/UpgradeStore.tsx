@@ -1,5 +1,5 @@
 import React from 'react';
-import './Store.css';
+import './UpgradeStore.css';
 
 type StoreItem = {
   name: string,
@@ -39,9 +39,9 @@ const Store: React.FC<StoreProps> = ({
   return (
     <div className="Store">
       <h3>Store</h3>
-      <div className="Store-buttons">
+      {/* <div className="Store-buttons">
         <button type="button" onClick={() => purchaseCapital(StoreData[0])}>Buy Taco Stand - 100</button>
-      </div>
+      </div> */}
       <div className='Store-inventory'>
         <h3>
           Taco stands:
