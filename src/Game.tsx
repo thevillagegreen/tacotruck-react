@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ClickArea from './components/ClickArea';
 import Store from './components/Store';
+import { GameInterface } from './GameInterface';
+import DefaultGameState from './DefaultGameState';
 
 type StoreItem = {
   name: string,
@@ -10,16 +12,20 @@ type StoreItem = {
   factor: number,
 }
 
-type GameInfo = {
-  currentCount: number;
-  perInterval: number;
-}
+// type GameInfo = {
+//   currentCount: number;
+//   perInterval: number;
+// }
 
 const Game: React.FC = () => {
+  let GameInfo: GameInterface;
   const [count, setCount] = useState<number>(0);
   const [perInt, setPerInt] = useState<number>(0);
   const [stands, setStands] = useState<number>(0);
   const [rests, setRests] = useState<number>(0);
+
+  const [GameState, setGameState] = useState<GameInterface>(DefaultGameState);
+  console.log(GameState);
 
   useEffect(() => {
     const interval = setInterval(() => {

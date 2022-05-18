@@ -10,9 +10,9 @@ interface UpgradeObject {
   name: 'placeholder';
 }
 
-export interface GameInfo {
+export interface GameInterface {
   tacos: number;
   perInterval: number;
   capital: CapitalObject[];
-  upgrades: UpgradeObject[];
+  upgrades?: UpgradeObject[];
 }
