@@ -1,39 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import ClickArea from './components/ClickArea';
 import CapitalStore from './components/CapitalStore';
-import { GameInterface } from './GameInterface';
+import { GameInterface, CapitalObject, UpgradeObject } from './GameInterface';
 import DefaultGameState from './DefaultGameState';
 
-type StoreItem = {
-  name: string,
-  display: string,
-  cost: number,
-  owned: number,
-  factor: number,
-}
-
-// type GameInfo = {
-//   currentCount: number;
-//   perInterval: number;
-// }
-
 const Game: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
-  const [perInt, setPerInt] = useState<number>(0);
-  const [stands, setStands] = useState<number>(0);
-  const [rests, setRests] = useState<number>(0);
-
   const [GameState, setGameState] = useState<GameInterface>(DefaultGameState);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (stands >= 1 || rests >= 1) {
-        console.log(`count: ${count}, perInt: ${perInt}`);
-        setCount(count + perInt);
+      if (GameState.ownsCapital) {
+        const tacoIncrement = GameState.tacos + GameState.perInterval;
+        setGameState({
+          ...GameState,
+          tacos: tacoIncrement,
+        });
       }
     }, 100);
     return () => clearInterval(interval);
-  }, [count]);
+  }, [GameState]);
 
   const handleTacoClickIncrement = () => {
     const tacosIncrement = GameState.tacos + 1;
@@ -45,20 +30,28 @@ const Game: React.FC = () => {
     );
   };
 
-  const handleCapitalPurchase = (item: StoreItem) => {
-    console.log(item);
-    setCount(count - item.cost);
-    if (item.name === 'stand') {
-      setCount(count - item.cost);
-      setStands(stands + 1);
-      setPerInt(perInt + 1);
-    } else if (item.name === 'restaurant') {
-      setRests(rests + 1);
-      setPerInt(perInt + 1);
+  const handleCapitalPurchase = (item: CapitalObject) => {
+    if (item.cost <= GameState.tacos) {
+      const newCapital = {
+        ...item,
+        owned: item.owned + 1,
+      };
+      const newCapitalArr = GameState.capital;
+      newCapitalArr[item.index] = newCapital;
+      const perIntIncrement = GameState.perInterval + item.increment;
+      setGameState(
+        {
+          ...GameState,
+          tacos: GameState.tacos - item.cost,
+          ownsCapital: true,
+          perInterval: perIntIncrement,
+          capital: newCapitalArr,
+        },
+      );
     }
   };
 
-  const upgradePurchase = (item: StoreItem) => {
+  const upgradePurchase = (item: UpgradeObject) => {
     console.log("placeholder");
   };
 
@@ -66,26 +59,18 @@ const Game: React.FC = () => {
     <div className="Game">
       <div className="Game-status">
         <h3>
-          Count:
-          { Math.floor(GameState.tacos) }
+          { `Tacos: ${Math.floor(GameState.tacos)}` }
         </h3>
         <h3>
-          Per Interval:
-          { GameState.perInterval }
-        </h3>
-        <h3>
-          Taco stands:
-          { GameState.capital[0].owned }
-        </h3>
-        <h3>
-          Restaurants:
-          { GameState.capital[1].owned }
+          { `Per second: 
+            ${GameState.tacos < 100 ? Math.round(GameState.perInterval * 100) / 10 : Math.floor(GameState.perInterval) * 100}`}
         </h3>
       </div>
       <ClickArea onClick={() => handleTacoClickIncrement()} />
       <CapitalStore
         handleCapitalPurchase={handleCapitalPurchase}
         capitalArr={GameState.capital}
+        tacos={GameState.tacos}
       />
     </div>
   );

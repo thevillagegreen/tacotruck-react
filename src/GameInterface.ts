@@ -3,7 +3,8 @@ export interface CapitalObject {
   display: string,
   cost: number,
   owned: number,
-  factor: number,
+  increment: number,
+  index: number,
 }
 
 export interface UpgradeObject {
@@ -13,6 +14,7 @@ export interface UpgradeObject {
 export interface GameInterface {
   tacos: number;
   perInterval: number;
+  ownsCapital: boolean;
   capital: CapitalObject[];
   upgrades?: UpgradeObject[];
 }

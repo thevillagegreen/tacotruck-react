@@ -1,59 +1,26 @@
 import React from 'react';
 import './UpgradeStore.css';
-
-type StoreItem = {
-  name: string,
-  display: string,
-  cost: number,
-  owned: number,
-  factor: number,
-}
-
-const StoreData = [
-  {
-    name: 'stand',
-    display: 'Taco Stand',
-    cost: 10,
-    owned: 0,
-    factor: 1.15,
-  }, {
-    name: 'restaurant',
-    display: 'Taco Restaurant',
-    cost: 50,
-    owned: 0,
-    factor: 1.15,
-  },
-];
+import { UpgradeObject } from '../GameInterface';
 
 type StoreProps = {
-  storePurchase?: (item: StoreItem) => void;
+  storePurchase?: (item: UpgradeObject) => void;
 }
 
-const Store: React.FC<StoreProps> = ({
-  storePurchase = (item: StoreItem) => {},
+const UpgradeStore: React.FC<StoreProps> = ({
+  storePurchase = (item: UpgradeObject) => {},
 }) => {
-  const purchaseCapital = (item: StoreItem) => {
+  const purchaseUpgrade = (item: UpgradeObject) => {
     storePurchase(item);
   };
 
   return (
-    <div className="Store">
+    <div className="UpgradeStore">
       <h3>Store</h3>
-      {/* <div className="Store-buttons">
-        <button type="button" onClick={() => purchaseCapital(StoreData[0])}>Buy Taco Stand - 100</button>
-      </div> */}
-      <div className='Store-inventory'>
-        <h3>
-          Taco stands:
-          { 10 }
-        </h3>
-        <h3>
-          Restaurants:
-          { 10 }
-        </h3>
+      <div className="UpgradeStore-inventory">
+        <h3>placeholder</h3>
       </div>
     </div>
   );
 };
 
-export default Store;
+export default UpgradeStore;

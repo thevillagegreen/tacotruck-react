@@ -2,66 +2,41 @@ import React from 'react';
 import './CapitalStore.css';
 import { CapitalObject } from '../GameInterface';
 
-type StoreItem = {
-  name: string,
-  display: string,
-  cost: number,
-  owned: number,
-  factor: number,
-}
-
-// const StoreData = [
-//   {
-//     name: 'stand',
-//     display: 'Taco Stand',
-//     cost: 10,
-//     owned: 0,
-//     factor: 1.15,
-//   }, {
-//     name: 'restaurant',
-//     display: 'Taco Restaurant',
-//     cost: 50,
-//     owned: 0,
-//     factor: 1.15,
-//   },
-// ];
-
 type StoreProps = {
-  handleCapitalPurchase?: (item: StoreItem) => void;
+  handleCapitalPurchase: (item: CapitalObject) => void;
   capitalArr: CapitalObject[];
+  tacos: number;
 }
 
-const Store: React.FC<StoreProps> = ({
-  handleCapitalPurchase = (item: StoreItem) => {},
+const CapitalStore: React.FC<StoreProps> = ({
+  handleCapitalPurchase = (item: CapitalObject) => {},
   capitalArr = [],
+  tacos = 0,
 }) => {
-  const purchaseCapital = (item: StoreItem) => {
+  const purchaseCapital = (item: CapitalObject) => {
     handleCapitalPurchase(item);
   };
-
-  console.log(capitalArr);
   return (
-    <div className="Store">
+    <div className="CapitalStore">
       <h3>Buy capital:</h3>
-      <div className="Store-buttons">
-        {capitalArr.map((object, i) => (
-          <button type="button" onClick={() => purchaseCapital(object)}>
+      <div className="CapitalStore-buttons">
+        {capitalArr.map((object) => (
+          <button disabled={object.cost > tacos} type="button" onClick={() => purchaseCapital(object)}>
             {object.name}
           </button>
         ))}
       </div>
-      <div className='Store-inventory'>
-        <h3>
-          Taco stands:
-          { 10 }
-        </h3>
-        <h3>
-          Restaurants:
-          { 10 }
-        </h3>
+      <div className="CapitalStore-inventory">
+        {capitalArr.map((object) => (
+          <div>
+            {/* TODO add tenary if for formating numbers < 100 */}
+            <h3>{ `${object.display} owned: ${object.owned}` }</h3>
+            <h3>{ `${object.display} making: ${Math.floor((object.owned * (object.increment * 100))) / 10} per second.` }</h3>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default Store;
+export default CapitalStore;
