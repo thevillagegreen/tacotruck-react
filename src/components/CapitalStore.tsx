@@ -42,7 +42,7 @@ const Store: React.FC<StoreProps> = ({
   console.log(capitalArr);
   return (
     <div className="Store">
-      <h3>Store</h3>
+      <h3>Buy capital:</h3>
       <div className="Store-buttons">
         {capitalArr.map((object, i) => (
           <button type="button" onClick={() => purchaseCapital(object)}>
