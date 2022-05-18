@@ -12,6 +12,7 @@ const DefaultGameState: GameInterface = {
       cost: 10,
       owned: 0,
       increment: 0.01,
+      priceFactor: 1.4,
     }, {
       index: 1,
       name: 'restaurant',
@@ -19,6 +20,7 @@ const DefaultGameState: GameInterface = {
       cost: 50,
       owned: 0,
       increment: 0.05,
+      priceFactor: 1.6,
     },
   ],
 };

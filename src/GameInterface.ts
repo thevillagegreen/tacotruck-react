@@ -5,10 +5,16 @@ export interface CapitalObject {
   owned: number,
   increment: number,
   index: number,
+  priceFactor: number,
 }
 
 export interface UpgradeObject {
-  name: 'placeholder';
+  name: string,
+  display: string,
+  cost: number,
+  isOwned: boolean,
+  target: CapitalObject | 'clicker',
+  impactFactor: number,
 }
 
 export interface GameInterface {

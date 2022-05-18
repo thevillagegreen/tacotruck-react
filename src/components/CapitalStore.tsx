@@ -22,7 +22,7 @@ const CapitalStore: React.FC<StoreProps> = ({
       <div className="CapitalStore-buttons">
         {capitalArr.map((object) => (
           <button disabled={object.cost > tacos} type="button" onClick={() => purchaseCapital(object)}>
-            {object.name}
+            { `${object.name} - ${object.cost}` }
           </button>
         ))}
       </div>

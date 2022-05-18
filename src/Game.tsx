@@ -35,6 +35,7 @@ const Game: React.FC = () => {
       const newCapital = {
         ...item,
         owned: item.owned + 1,
+        cost: Math.floor(item.cost + item.priceFactor),
       };
       const newCapitalArr = GameState.capital;
       newCapitalArr[item.index] = newCapital;
