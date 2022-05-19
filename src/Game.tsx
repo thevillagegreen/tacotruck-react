@@ -3,6 +3,7 @@ import ClickArea from './components/ClickArea';
 import CapitalStore from './components/CapitalStore';
 import { GameInterface, CapitalObject, UpgradeObject } from './GameInterface';
 import DefaultGameState from './DefaultGameState';
+import UpgradeStore from './components/UpgradeStore';
 
 const Game: React.FC = () => {
   const [GameState, setGameState] = useState<GameInterface>(DefaultGameState);
@@ -52,8 +53,8 @@ const Game: React.FC = () => {
     }
   };
 
-  const upgradePurchase = (item: UpgradeObject) => {
-    console.log("placeholder");
+  const handleUpgradePurchase = (item: UpgradeObject) => {
+    console.log(item);
   };
 
   return (
@@ -71,6 +72,11 @@ const Game: React.FC = () => {
       <CapitalStore
         handleCapitalPurchase={handleCapitalPurchase}
         capitalArr={GameState.capital}
+        tacos={GameState.tacos}
+      />
+      <UpgradeStore
+        handleUpgradePurchase={handleUpgradePurchase}
+        upgradesArr={GameState.upgrades}
         tacos={GameState.tacos}
       />
     </div>

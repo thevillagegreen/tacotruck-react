@@ -3,19 +3,40 @@ import './UpgradeStore.css';
 import { UpgradeObject } from '../GameInterface';
 
 type StoreProps = {
-  storePurchase?: (item: UpgradeObject) => void;
+  handleUpgradePurchase: (item: UpgradeObject) => void;
+  upgradesArr: UpgradeObject[];
+  tacos: number;
 }
 
+const upgradesDisplay = (upgradesArr: UpgradeObject[], tacos: number): UpgradeObject[] => {
+  const displayArr: UpgradeObject[] = [];
+  upgradesArr.forEach((obj) => {
+    if (obj.displayThreshold < tacos || obj.metThreshold) {
+      displayArr.push(obj);
+    }
+  });
+  return displayArr;
+};
+
 const UpgradeStore: React.FC<StoreProps> = ({
-  storePurchase = (item: UpgradeObject) => {},
+  handleUpgradePurchase = (item: UpgradeObject) => {},
+  upgradesArr = [],
+  tacos = 0,
 }) => {
   const purchaseUpgrade = (item: UpgradeObject) => {
-    storePurchase(item);
+    handleUpgradePurchase(item);
   };
 
   return (
     <div className="UpgradeStore">
-      <h3>Store</h3>
+      <h3>Buy upgrades:</h3>
+      <div className="UpgradeStore-buttons">
+        {upgradesDisplay(upgradesArr, tacos).map((object) => (
+          <button disabled={object.cost > tacos} type="button" onClick={() => purchaseUpgrade(object)}>
+            { `${object.name} - ${object.cost}` }
+          </button>
+        ))}
+      </div>
       <div className="UpgradeStore-inventory">
         <h3>placeholder</h3>
       </div>

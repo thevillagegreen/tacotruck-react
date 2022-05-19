@@ -10,11 +10,13 @@ export interface CapitalObject {
 
 export interface UpgradeObject {
   name: string,
-  display: string,
   cost: number,
   isOwned: boolean,
-  target: CapitalObject | 'clicker',
+  targetCapitalIndex: number,
   impactFactor: number,
+  index: number,
+  displayThreshold: number,
+  metThreshold: boolean,
 }
 
 export interface GameInterface {
@@ -22,5 +24,5 @@ export interface GameInterface {
   perInterval: number;
   ownsCapital: boolean;
   capital: CapitalObject[];
-  upgrades?: UpgradeObject[];
+  upgrades: UpgradeObject[];
 }

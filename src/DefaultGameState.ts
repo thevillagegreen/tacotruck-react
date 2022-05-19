@@ -23,6 +23,36 @@ const DefaultGameState: GameInterface = {
       priceFactor: 1.6,
     },
   ],
+  upgrades: [
+    {
+      index: 0,
+      name: 'Double stand production',
+      cost: 60,
+      isOwned: false,
+      metThreshold: false,
+      targetCapitalIndex: 0,
+      impactFactor: 2,
+      displayThreshold: 0,
+    }, {
+      index: 1,
+      name: 'Double stand production 2',
+      cost: 120,
+      isOwned: false,
+      metThreshold: false,
+      targetCapitalIndex: 0,
+      impactFactor: 2,
+      displayThreshold: 100,
+    }, {
+      index: 2,
+      name: 'Double stand production 3',
+      cost: 250,
+      isOwned: false,
+      metThreshold: false,
+      targetCapitalIndex: 0,
+      impactFactor: 2,
+      displayThreshold: 150,
+    },
+  ],
 };
 
 export default DefaultGameState;
