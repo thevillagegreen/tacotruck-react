@@ -31,8 +31,27 @@ const Game: React.FC = () => {
     );
   };
 
+  const handleUpgradeThreholds = () => {
+    const newUpgradesArr = GameState.upgrades;
+    GameState.upgrades.forEach((obj, i) => {
+      if (GameState.tacos > obj.displayThreshold) {
+        newUpgradesArr[i] = {
+          ...obj,
+          metThreshold: true,
+        };
+      }
+    });
+    setGameState(
+      {
+        ...GameState,
+        upgrades: newUpgradesArr,
+      },
+    );
+  };
+
   const handleCapitalPurchase = (item: CapitalObject) => {
-    if (item.cost <= GameState.tacos) {
+    if (item.cost <= GameState.tacos) { // is this needed?
+      handleUpgradeThreholds();
       const newCapital = {
         ...item,
         owned: item.owned + 1,
@@ -54,7 +73,33 @@ const Game: React.FC = () => {
   };
 
   const handleUpgradePurchase = (item: UpgradeObject) => {
-    console.log(item);
+    if (item.cost <= GameState.tacos) { // is this needed?
+      handleUpgradeThreholds();
+      const oldIncrement = GameState.capital[item.targetCapitalIndex].increment;
+      const newCapital: CapitalObject = {
+        ...GameState.capital[item.targetCapitalIndex],
+        increment: oldIncrement * item.impactFactor,
+      };
+      const newCapitalArr = GameState.capital;
+      newCapitalArr[item.targetCapitalIndex] = newCapital;
+      const addPerInterval = oldIncrement * GameState.capital[item.targetCapitalIndex].owned;
+      const newUpgrade: UpgradeObject = {
+        ...GameState.upgrades[item.index],
+        isOwned: true,
+      };
+      const newUpgradeArr = GameState.upgrades;
+      newUpgradeArr[item.index] = newUpgrade;
+      setGameState(
+        {
+          ...GameState,
+          tacos: GameState.tacos - item.cost,
+          perInterval: GameState.perInterval + addPerInterval,
+          capital: newCapitalArr,
+          upgrades: newUpgradeArr,
+        },
+      );
+    }
+    console.log(GameState.upgrades);
   };
 
   return (

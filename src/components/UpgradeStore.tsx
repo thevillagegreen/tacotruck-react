@@ -11,7 +11,7 @@ type StoreProps = {
 const upgradesDisplay = (upgradesArr: UpgradeObject[], tacos: number): UpgradeObject[] => {
   const displayArr: UpgradeObject[] = [];
   upgradesArr.forEach((obj) => {
-    if (obj.displayThreshold < tacos || obj.metThreshold) {
+    if ((obj.displayThreshold < tacos || obj.metThreshold) && !obj.isOwned) {
       displayArr.push(obj);
     }
   });
@@ -36,9 +36,6 @@ const UpgradeStore: React.FC<StoreProps> = ({
             { `${object.name} - ${object.cost}` }
           </button>
         ))}
-      </div>
-      <div className="UpgradeStore-inventory">
-        <h3>placeholder</h3>
       </div>
     </div>
   );

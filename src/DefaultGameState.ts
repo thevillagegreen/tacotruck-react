@@ -27,12 +27,12 @@ const DefaultGameState: GameInterface = {
     {
       index: 0,
       name: 'Double stand production',
-      cost: 60,
+      cost: 20,
       isOwned: false,
       metThreshold: false,
       targetCapitalIndex: 0,
       impactFactor: 2,
-      displayThreshold: 0,
+      displayThreshold: 10,
     }, {
       index: 1,
       name: 'Double stand production 2',
