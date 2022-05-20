@@ -1,0 +1,24 @@
+.Game {
+  display: grid;
+  grid-template-columns: [first] 500px [line2] 500px [col3-start] auto [four] 500px [end];
+}
+
+.Game-Area {
+  grid-column-start: 2;
+  grid-column-end: col3-start;
+}
+
+.Game-Store {
+  grid-column-start: col3-start;
+  grid-column-end: 4;
+  display: grid;
+  justify-content: center;
+}
+
+.Game-CapitalStore {
+
+}
+
+.Game-UpgradeStore {
+
+}

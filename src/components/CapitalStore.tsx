@@ -21,9 +21,12 @@ const CapitalStore: React.FC<StoreProps> = ({
       <h3>Buy capital:</h3>
       <div className="CapitalStore-buttons">
         {capitalArr.map((object) => (
-          <button disabled={object.cost > tacos} type="button" onClick={() => purchaseCapital(object)}>
-            { `${object.name} - ${object.cost}` }
-          </button>
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+          <div className="CapitalStore-item" onClick={() => purchaseCapital(object)}>
+            <img src={object.image} alt={object.display} />
+            <p className="CapitalStore-item-name">{ `${object.name}` }</p>
+            <p className="CapitalStore-item-cost">{ `Cost: ${object.cost} tacos` }</p>
+          </div>
         ))}
       </div>
       <div className="CapitalStore-inventory">

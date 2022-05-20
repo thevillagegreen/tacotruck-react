@@ -4,7 +4,7 @@ import Game from './Game';
 
 const App = () => (
   <div className="App">
-    <h1>Taco Truck Idle Clicker</h1>
+    <h1>Taco Tycoon</h1>
     <Game />
   </div>
 );

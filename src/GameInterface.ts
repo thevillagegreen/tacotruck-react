@@ -6,6 +6,7 @@ export interface CapitalObject {
   increment: number,
   index: number,
   priceFactor: number,
+  image: string,
 }
 
 export interface UpgradeObject {
